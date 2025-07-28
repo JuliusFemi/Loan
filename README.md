@@ -1,4 +1,4 @@
-# Compensation_prediction
+# Loan repayment_prediction
 
 Predictive Default Risk Modeling for Smarter Loan Approvals
 
@@ -38,3 +38,20 @@ Reduce credit losses by pre‑emptively flagging high‑risk applicants
 Increase volume by fast‑tracking low‑risk approvals
 
 Optimize pricing and underwriting workflows through data‑driven probability thresholds and adjustable loan terms
+
+Dictionary : https://www.kaggle.com/datasets/udaymalviya/bank-loan-data
+
+
+# Predictive Default Risk Modeling
+
+## Project Overview  
+Build a regularized logistic regression model on 45,000 historical loan applications to estimate each applicant’s probability of default. The model supports automated pre‑screening of low‑risk borrowers and flagging of high‑risk applicants, reducing credit losses and accelerating approval workflows.
+
+## Data  
+Raw data is stored in `data/raw/` (from Kaggle). Key fields include:  
+- Demographics: `person_age`, `person_gender`, `person_education`  
+- Financial profile: `person_income`, `person_emp_exp`, `person_home_ownership`  
+- Loan details: `loan_amnt`, `loan_intent`, `loan_int_rate`, `loan_percent_income`  
+- Credit history: `cb_person_cred_hist_length`, `credit_score`, `previous_loan_defaults_on_file`  
+- Target: `loan_status` (0 = repaid, 1 = default)
+
