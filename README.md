@@ -164,5 +164,5 @@ Check out the link to read more about protected characteristics: [Reference](htt
 | person_home_ownership_OWN          | **+0.17**    | Homeowners (vs. baseline group) show slightly higher default risk in this model. |
 
 ## Conclusion
-- The Random Forest model is more accurate than our Logistic Regression model; however, it is far less interpretable.
+- The Random Forest model is more accurate than Logistic Regression model for this problem; however, it is far less interpretable.
 - We recommend using the models as appropriate: Logistic Regression for interpretability, and Random Forest for predictive accuracy.
