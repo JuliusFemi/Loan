@@ -138,3 +138,33 @@ Justification for removing age: [Reference](https://www.consumerfinance.gov/ask-
 - Repaid: Median ≈ $9,500  
 - Defaulters tend to request slightly lower amounts.
 
+### Modeling 
+
+### Data Dropped to Ensure Model Success
+- **Protected Characteristic:**  
+  Under the Equal Credit Opportunity Act, age is a protected class lenders cannot use it to deny or price credit. Hence, age will be dropped from the features.
+`Refrence`: https://www.consumerfinance.gov/ask-cfpb/can-a-card-issuer-consider-my-age-when-deciding-whether-to-issue-a-credit-card-to-me-en-20/#:~:text=Under%20the%20Equal%20Credit%20Opportunity,used%20in%20the%20applicant's%20favor
+- Dropped columns 'loan_int_rate' and 'loan_percent_income' to avoid data leakage.
+
+### F1 Scores
+- Logarithmic Model: 0.917
+- Hyperparamerter Tuned Log Model: 0.92
+- Random Forest Model: 0.94
+
+###  Logistic Regression Coefficients For Interpretation
+
+| Feature                             | Coefficient | Interpretation |
+|-------------------------------------|-------------|----------------|
+| previous_loan_defaults_on_file_Yes | **+5.06**    | Strongest predictor of default — having a prior default increases the odds substantially. |
+| person_income                       | **+1.06**    | Higher income is associated with a higher chance of default (possibly counterintuitive; may reflect riskier borrowers with high reported income). |
+| person_home_ownership_RENT         | **−0.83**    | Renters are less likely to default compared to the baseline category (possibly due to underwriting bias or data pattern). |
+| loan_intent_VENTURE                | **+0.58**    | Loans intended for ventures carry higher default risk. |
+| loan_amnt                           | **−0.57**    | Higher loan amounts are associated with lower default probability — potentially indicating trust in high-quality borrowers. |
+| loan_intent_EDUCATION              | **+0.46**    | Educational loans tend to have higher default risk. |
+| credit_score                        | **+0.35**    | Surprisingly positive; could be due to correlation with other riskier variables or multicollinearity. |
+| loan_intent_PERSONAL               | **+0.25**    | Personal loan intents carry elevated risk of default. |
+| person_home_ownership_OWN          | **+0.17**    | Homeowners (vs. baseline group) show slightly higher default risk in this model. |
+
+### Conclusion
+- The Random Forest model is more accurate than our Logistic Regression model; however, it is far less interpretable.
+- We recommend using the models as appropriate: Logistic Regression for interpretability, and Random Forest for predictive accuracy.
