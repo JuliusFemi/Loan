@@ -146,7 +146,7 @@ Justification for removing age: [Reference](https://www.consumerfinance.gov/ask-
 `Refrence`: https://www.consumerfinance.gov/ask-cfpb/can-a-card-issuer-consider-my-age-when-deciding-whether-to-issue-a-credit-card-to-me-en-20/#:~:text=Under%20the%20Equal%20Credit%20Opportunity,used%20in%20the%20applicant's%20favor
 - Dropped columns 'loan_int_rate' and 'loan_percent_income' to avoid data leakage.
 
-### F1 Scores
+### F1 Scores (base 77.8)
 - Logarithmic Model: 0.917
 - Hyperparamerter Tuned Log Model: 0.92
 - Random Forest Model: 0.94
