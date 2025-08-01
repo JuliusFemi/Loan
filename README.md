@@ -1,57 +1,140 @@
-# Loan repayment_prediction
+# Predictive Default Risk Modeling for Smarter Loan Approvals
 
-Predictive Default Risk Modeling for Smarter Loan Approvals
+## Project Summary
 
-Problem Statement
-The bank needs to approve as many high‑quality loans as possible while minimizing defaults. Using 45 000 historical loan applications, we will build a regularized logistic regression classifier that:
+This project builds a logistic regression model using a dataset of 45,000 historical loan applications. The goal is to estimate the probability that a borrower will default, enabling smarter, data-driven loan approval decisions.
 
-Estimates each applicant’s probability of default via .predict_proba() (to support both binary decisions and flexible interest‑rate/term adjustments)
+## Objective
 
-Leverages applicant features:
+- Balance recall (identify actual defaulters) and precision (avoid false positives).
+- Optimize the F1-score on the “default” class as the primary evaluation metric.
 
-Demographics: age, gender, education
+## Dataset Overview
+[Data Dictionary](https://www.kaggle.com/datasets/udaymalviya/bank-loan-data)
+- Total Records: 45,000 loan applications  
+- Features: 14 columns including demographics, financial profile, credit history, and loan details  
+- Target Variable: `loan_status`  
+  - 0 = Defaulted (77.8%)  
+  - 1 = Repaid (22.2%)
 
-Financial profile: income, employment tenure, home‑ownership
+## Key Features
 
-Credit history: credit score, length of credit history, past defaults
+### Demographics  
+- `person_age`  
+- `person_gender`  
+- `person_education`
 
-Loan details: amount, purpose, interest rate, payment‑to‑income ratio
+### Financial Profile  
+- `person_income`  
+- `person_emp_exp`  
+- `person_home_ownership`
 
-Target Metric
-We will optimize and report the F₁‑Score on the “default” (positive) class:
+### Credit History  
+- `credit_score`  
+- `cb_person_cred_hist_length`  
+- `previous_loan_defaults_on_file`
 
-Balances precision (of the loans we flag as risky, how many truly default)
-and recall (of all actual defaulters, how many we catch)
+### Loan Details  
+- `loan_amnt`  
+- `loan_int_rate`  
+- `loan_percent_income`  
+- `loan_intent`  
+- `loan_status`
 
-Ensures we both avoid false alarms on good borrowers and catch genuine high‑risk applicants
+## Data Preparation
 
-Interpretability & Calibration
-
-Regularized logistic regression (with default L2 penalty) provides feature coefficients—so we can see how regularization shifts each coefficient and understand feature importance.
-
-Using .predict_proba(), we obtain well‑calibrated default probabilities that can drive tiered interest‑rate or term‑adjustment policies.
-
-Business Impact
-
-Reduce credit losses by pre‑emptively flagging high‑risk applicants
-
-Increase volume by fast‑tracking low‑risk approvals
-
-Optimize pricing and underwriting workflows through data‑driven probability thresholds and adjustable loan terms
-
-Dictionary : https://www.kaggle.com/datasets/udaymalviya/bank-loan-data
-
-
-# Predictive Default Risk Modeling
-
-## Project Overview  
-Build a regularized logistic regression model on 45,000 historical loan applications to estimate each applicant’s probability of default. The model supports automated pre‑screening of low‑risk borrowers and flagging of high‑risk applicants, reducing credit losses and accelerating approval workflows.
+| Column                          | Current Type | To Convert To | Reason |
+|---------------------------------|--------------|---------------|--------|
+| `person_gender`                   | object       | category      | Limited unique values |
+| `person_education`               | object       | category      | one-hot encoding |
+| `person_home_ownership`          | object       | category      | Nominal values |
+| `loan_intent`                    | object       | category      | Categorical purpose |
+| `previous_loan_defaults_on_file` | object       | int (Yes=1, No=0) | Binary conversion |
+| `loan_status`                    | int64        | Already correct | Target variable |
+| `person_age, person_income, etc.` | numeric      | No change     | Already numeric |
 
 ## Data  
-Raw data is stored in `data/raw/` (from Kaggle). Key fields include:  
-- Demographics: `person_age`, `person_gender`, `person_education`  
-- Financial profile: `person_income`, `person_emp_exp`, `person_home_ownership`  
-- Loan details: `loan_amnt`, `loan_intent`, `loan_int_rate`, `loan_percent_income`  
-- Credit history: `cb_person_cred_hist_length`, `credit_score`, `previous_loan_defaults_on_file`  
 - Target: `loan_status` (0 = repaid, 1 = default)
+
+
+## Exploratory Data Analysis (EDA)
+
+### Age Distribution
+- Most applicants are aged between 20 and 35, with a peak in the mid-20s.
+- Very few applicants are older than 60.
+
+### Ethics & Regulatory Considerations for Using Age
+
+- **Protected Characteristic:**  
+  Under the Equal Credit Opportunity Act, age is a protected class lenders cannot use it to deny or price credit. Hence, age will be dropped from the feature.
+
+[Reference](https://www.consumerfinance.gov/ask-cfpb/can-a-card-issuer-consider-my-age-when-deciding-whether-to-issue-a-credit-card-to-me-en-20/#:~:text=Under%20the%20Equal%20Credit%20Opportunity,used%20in%20the%20applicant's%20favor)
+
+
+### Gender Distribution
+- Male: ~55%  
+- Female: ~45%
+
+### Education Distribution
+- Bachelor’s degree: most common (~30%)  
+- Associate and High School: ~27% each  
+- Master’s: ~15%  
+- Doctorate: ~1–2%
+
+### Education vs Loan Repayment
+
+| Education Level | Default Rate (%) |
+|-----------------|------------------|
+| Master          | 78.24            |
+| Associate       | 77.97            |
+| High School     | 77.69            |
+| Bachelor        | 77.48            |
+| Doctorate       | 77.13            |
+
+**Master** holders show the highest default rate (78.24%), followed by **Associate** with (77.97 %) default rate. **High school** with (77.69%), **Bachelor** with (77.48%) and **Doctorate** with 77.13% default rate
+
+## Income Analysis
+
+### Distribution
+- Median income: approximately $67,048.
+
+### Income vs Loan Status
+- Defaulted (0): Median ≈ $72,928  
+- Repaid (1): Median ≈ $50,629  
+- Defaulters have slightly higher median income.
+
+## Employment Experience
+
+### Distribution
+- Median experience: approximately 3 years.
+- Right skewed distribution with outliers up to 125 years, which will be removed.
+
+### Experience vs Loan Status
+- Defaulted: Median ≈ 4 years  
+- Repaid: Median ≈ 3 years  
+- Slightly higher median tenure for defaulters.
+
+**Outliers:**  
+- Many extreme experince values above 60 years. These are considered errors and will be dropped.
+[Reference](https://www.guardianlife.com/retirement/average-age)
+
+## Home Ownership
+
+- Renters: approximately 52%  
+- Mortgage: approximately 41%  
+- Own: approximately 7%  
+- Other: less than 1%
+
+**Insight:** Most applicants are either renters or mortgage holders.
+
+## Loan Amount Analysis
+
+### Distribution
+- Common clusters at $5,000, $10,000, $15,000, $20,000.
+- Median loan amount is around $8,000.
+
+### Loan Amount vs Loan Status
+- Defaulted: Median ≈ $8,000  
+- Repaid: Median ≈ $9,500  
+- Defaulters tend to request slightly lower amounts.
 
