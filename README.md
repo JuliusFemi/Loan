@@ -1,8 +1,8 @@
-# Predictive Default Risk Modeling for Smarter Loan Approvals
+# Predictive Default Risk Modelling for Smarter Loan Approvals
 
 ## Project Summary
 
-This project builds a logistic regression model using a dataset of 45,000 historical loan applications. The goal is to estimate the probability that a borrower will default, enabling smarter, data-driven loan approval decisions.
+This project builds a logistic regression model using a dataset of 45,000 historical loan applications. The goal is to estimate that a borrower will default, enabling smarter, data-driven loan approval decisions.
 
 ## Objective
 
@@ -10,6 +10,7 @@ This project builds a logistic regression model using a dataset of 45,000 histor
 - Optimize the F1-score on the “default” class as the primary evaluation metric.
 
 ## Dataset Overview
+Data Source: [Kaggle](https://www.kaggle.com/datasets/udaymalviya/bank-loan-data)
 [Data Dictionary](https://www.kaggle.com/datasets/udaymalviya/bank-loan-data)
 - Total Records: 45,000 loan applications  
 - Features: 14 columns including demographics, financial profile, credit history, and loan details  
@@ -108,7 +109,7 @@ This project builds a logistic regression model using a dataset of 45,000 histor
 
 **Outliers:**  
 - Many extreme experince values above 60 years. These are considered errors and will be dropped.
-[Reference](https://www.guardianlife.com/retirement/average-age)
+  [Reference](https://www.guardianlife.com/retirement/average-age)
 
 ## Home Ownership
 
@@ -166,3 +167,7 @@ Check out the link to read more about protected characteristics: [Reference](htt
 ## Conclusion
 - The Random Forest model is more accurate than Logistic Regression model for this problem; however, it is far less interpretable.
 - We recommend using the models as appropriate: Logistic Regression for interpretability, and Random Forest for predictive accuracy.
+
+  ## Reference 
+  - [Consumerfinance](https://www.consumerfinance.gov/ask-cfpb/can-a-card-issuer-consider-my-age-when-deciding-whether-to-issue-a-credit-card-to-me-en-20/#:~:text=Under%20the%20Equal%20Credit%20Opportunity,used%20in%20the%20applicant's%20favor)
+  - [Gurdianlife](https://www.guardianlife.com/retirement/average-age)
