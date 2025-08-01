@@ -68,7 +68,7 @@ This project builds a logistic regression model using a dataset of 45,000 histor
 - **Protected Characteristic:**  
   Under the Equal Credit Opportunity Act, age is a protected class lenders cannot use it to deny or price credit. Hence, age will be dropped from the feature.
 
-[Reference](https://www.consumerfinance.gov/ask-cfpb/can-a-card-issuer-consider-my-age-when-deciding-whether-to-issue-a-credit-card-to-me-en-20/#:~:text=Under%20the%20Equal%20Credit%20Opportunity,used%20in%20the%20applicant's%20favor)
+Justification for removing age: [Reference](https://www.consumerfinance.gov/ask-cfpb/can-a-card-issuer-consider-my-age-when-deciding-whether-to-issue-a-credit-card-to-me-en-20/#:~:text=Under%20the%20Equal%20Credit%20Opportunity,used%20in%20the%20applicant's%20favor)
 
 
 ### Gender Distribution
