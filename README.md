@@ -63,14 +63,6 @@ This project builds a logistic regression model using a dataset of 45,000 histor
 - Most applicants are aged between 20 and 35, with a peak in the mid-20s.
 - Very few applicants are older than 60.
 
-### Ethics & Regulatory Considerations for Using Age
-
-- **Protected Characteristic:**  
-  Under the Equal Credit Opportunity Act, age is a protected class lenders cannot use it to deny or price credit. Hence, age will be dropped from the feature.
-
-Justification for removing age: [Reference](https://www.consumerfinance.gov/ask-cfpb/can-a-card-issuer-consider-my-age-when-deciding-whether-to-issue-a-credit-card-to-me-en-20/#:~:text=Under%20the%20Equal%20Credit%20Opportunity,used%20in%20the%20applicant's%20favor)
-
-
 ### Gender Distribution
 - Male: ~55%  
 - Female: ~45%
@@ -141,9 +133,13 @@ Justification for removing age: [Reference](https://www.consumerfinance.gov/ask-
 ## Modeling 
 
 ### Data Dropped to Ensure Model Success
+-### Ethics & Regulatory Considerations for Using Age
+
 - **Protected Characteristic:**  
-  Under the Equal Credit Opportunity Act, age is a protected class lenders cannot use it to deny or price credit. Hence, age will be dropped from the features.
-`Refrence`: https://www.consumerfinance.gov/ask-cfpb/can-a-card-issuer-consider-my-age-when-deciding-whether-to-issue-a-credit-card-to-me-en-20/#:~:text=Under%20the%20Equal%20Credit%20Opportunity,used%20in%20the%20applicant's%20favor
+  Under the Equal Credit Opportunity Act, age is a protected class lenders cannot use it to deny or price credit. Hence, age will be dropped from the feature.
+
+Check out the link to read more about protected characteristics: [Reference](https://www.consumerfinance.gov/ask-cfpb/can-a-card-issuer-consider-my-age-when-deciding-whether-to-issue-a-credit-card-to-me-en-20/#:~:text=Under%20the%20Equal%20Credit%20Opportunity,used%20in%20the%20applicant's%20favor)
+
 - Dropped columns 'loan_int_rate' and 'loan_percent_income' to avoid data leakage.
 
 ### F1 Scores (base default rate 77.8)
