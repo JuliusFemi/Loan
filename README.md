@@ -138,7 +138,7 @@ Justification for removing age: [Reference](https://www.consumerfinance.gov/ask-
 - Repaid: Median ≈ $9,500  
 - Defaulters tend to request slightly lower amounts.
 
-### Modeling 
+## Modeling 
 
 ### Data Dropped to Ensure Model Success
 - **Protected Characteristic:**  
@@ -165,6 +165,6 @@ Justification for removing age: [Reference](https://www.consumerfinance.gov/ask-
 | loan_intent_PERSONAL               | **+0.25**    | Personal loan intents carry elevated risk of default. |
 | person_home_ownership_OWN          | **+0.17**    | Homeowners (vs. baseline group) show slightly higher default risk in this model. |
 
-### Conclusion
+## Conclusion
 - The Random Forest model is more accurate than our Logistic Regression model; however, it is far less interpretable.
 - We recommend using the models as appropriate: Logistic Regression for interpretability, and Random Forest for predictive accuracy.
