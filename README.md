@@ -134,7 +134,7 @@ Data Source: [Kaggle](https://www.kaggle.com/datasets/udaymalviya/bank-loan-data
 ## Modeling 
 
 ### Data Dropped to Ensure Model Success
--### Ethics & Regulatory Considerations for Using Age
+- Ethics & Regulatory Considerations for Using Age
 
 - **Protected Characteristic:**  
   Under the Equal Credit Opportunity Act, age is a protected class lenders cannot use it to deny or price credit. Hence, age will be dropped from the feature.
